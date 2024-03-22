@@ -22,11 +22,11 @@
         "named": true
       },
       {
-        "type": "identifier",
+        "type": "call_expression",
         "named": true
       },
       {
-        "type": "number",
+        "type": "identifier",
         "named": true
       }
     ]
@@ -45,6 +45,20 @@
       },
       {
         "type": "expression",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "type",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "number",
+        "named": true
+      },
+      {
+        "type": "string",
         "named": true
       }
     ]
@@ -84,6 +98,32 @@
     }
   },
   {
+    "type": "call_expression",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "function": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "function_declaration",
     "named": true,
     "fields": {
@@ -101,6 +141,24 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
           {
             "type": "identifier",
             "named": true
@@ -209,6 +267,19 @@
     }
   },
   {
+    "type": "string",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -222,6 +293,10 @@
   },
   {
     "type": "-",
+    "named": false
+  },
+  {
+    "type": ":",
     "named": false
   },
   {
