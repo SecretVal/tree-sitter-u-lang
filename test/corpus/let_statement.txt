@@ -1,0 +1,13 @@
+====================================
+Let statement
+====================================
+
+let a = 12
+
+---
+(program
+    (statement
+        (let_statement
+            (identifier)
+            (expression
+                (number)))))

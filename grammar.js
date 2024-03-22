@@ -1,37 +1,55 @@
 module.exports = grammar({
-  name: 'YOUR_LANGUAGE_NAME',
+  name: "U_LANG",
+
+  word: $ => $.identifier,
 
   rules: {
-    expression: $ => choice(
+    program: $ => repeat($.statement),
+    statement: $ => choice(
+      $.expression_statement,
+      $.declaration,
+      $.block,
+    ),
+    block: $ => seq(
+      "{",
+      repeat($.statement),
+      "}",
+    ),
+    expression_statement: $ => choice(
+      $.identifier,
       $.number,
       $.binary_expression,
     ),
     number: $ => /\d+/,
+    identifier: $ => /[a-z]+/,
+    declaration: $ => choice(
+      $.let_binding,
+      $.function_declaration
+    ),
+    let_binding: $ => seq(
+      field("kind", choice("let", "var", "const")),
+      field("name", $.identifier),
+      "=",
+      field("value", $.expression_statement),
+    ),
+    function_declaration: $ => seq(
+      "fn",
+      field("name", $.identifier),
+      $.block,
+    ),
     binary_expression: $ => choice(
       $.plus_expression,
       $.minus_expression,
-      $.div_expression,
-      $.mult_expression,
     ),
-    plus_expression: $ => seq(
-      $.number,
+    plus_expression: $ => prec.left(2, seq(
+      $.expression_statement,
       "+",
-      $.number
-    ),
-    minus_expression: $ => seq(
-      $.number,
+      $.expression_statement,
+    )),
+    minus_expression: $ => prec.left(2, seq(
+      $.expression_statement,
       "-",
-      $.number
-    ),
-    div_expression: $ => seq(
-      $.number,
-      "/",
-      $.number
-    ),
-    mult_expression: $ => seq(
-      $.number,
-      "*",
-      $.number
-    ),
+      $.expression_statement,
+    )),
   }
 });
