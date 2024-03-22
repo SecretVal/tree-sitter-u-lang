@@ -4,6 +4,8 @@ Functions
 
 fn main {
   let a = 2
+  let b = 2 + 2
+  let b = 2 + 2 - 2
 }
 
 ---
@@ -13,4 +15,19 @@ fn main {
     (block
       (let_binding
         (identifier)
-        (number)))))
+        (number))
+      (let_binding
+        (identifier)
+        (binary_expression
+          (plus_expression
+            (number)
+            (number))))
+      (let_binding
+        (identifier)
+          (binary_expression
+            (minus_expression
+              (binary_expression
+                (plus_expression
+                  (number)
+                  (number)))
+                (number)))))))
