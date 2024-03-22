@@ -6,15 +6,10 @@ Number Expressions Complex
 
 ---
 (program
- (expression
   (binary_expression
-   (minus_expression
-    (expression
-     (binary_expression
-      (plus_expression
-        (expression
-          (number))
-        (expression
-          (number)))))
-    (expression
-     (number))))))
+    (minus_expression
+      (binary_expression
+        (plus_expression
+          (number)
+          (number)))
+      (number))))

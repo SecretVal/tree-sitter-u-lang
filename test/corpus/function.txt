@@ -1,0 +1,16 @@
+===============================
+Functions
+===============================
+
+fn main {
+  let a = 2
+}
+
+---
+(program
+  (function_declaration
+    (identifier)
+    (block
+      (let_binding
+        (identifier)
+        (number)))))

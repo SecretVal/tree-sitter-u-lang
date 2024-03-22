@@ -8,10 +8,7 @@ Number Expressions
 
 
 (program
-  (expression
-    (binary_expression
-      (plus_expression
-        (expression
-          (number))
-        (expression
-          (number))))))
+  (binary_expression
+    (plus_expression
+      (number)
+      (number))))

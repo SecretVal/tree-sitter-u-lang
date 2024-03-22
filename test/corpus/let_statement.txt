@@ -6,8 +6,6 @@ let a = 12
 
 ---
 (program
-    (statement
-        (let_statement
-            (identifier)
-            (expression
-                (number)))))
+    (let_binding
+        (identifier)
+        (number)))

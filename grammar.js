@@ -3,10 +3,16 @@ module.exports = grammar({
 
   word: $ => $.identifier,
 
+  supertypes: $ => [
+    $.statement,
+    $.expression,
+    $.declaration,
+  ],
+
   rules: {
     program: $ => repeat($.statement),
     statement: $ => choice(
-      $.expression_statement,
+      $.expression,
       $.declaration,
       $.block,
     ),
@@ -15,7 +21,7 @@ module.exports = grammar({
       repeat($.statement),
       "}",
     ),
-    expression_statement: $ => choice(
+    expression: $ => choice(
       $.identifier,
       $.number,
       $.binary_expression,
@@ -30,7 +36,7 @@ module.exports = grammar({
       field("kind", choice("let", "var", "const")),
       field("name", $.identifier),
       "=",
-      field("value", $.expression_statement),
+      field("value", $.expression),
     ),
     function_declaration: $ => seq(
       "fn",
@@ -42,14 +48,14 @@ module.exports = grammar({
       $.minus_expression,
     ),
     plus_expression: $ => prec.left(2, seq(
-      $.expression_statement,
+      $.expression,
       "+",
-      $.expression_statement,
+      $.expression,
     )),
     minus_expression: $ => prec.left(2, seq(
-      $.expression_statement,
+      $.expression,
       "-",
-      $.expression_statement,
+      $.expression,
     )),
   }
 });
