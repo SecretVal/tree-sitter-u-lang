@@ -2,7 +2,7 @@
 Functions
 ===============================
 
-fn main {
+fn main() {
   let a = 2
   let b = 2 + 2
   let b = 2 + 2 - 2

@@ -1,1 +1,2 @@
-let abcd = 1 + 2
+fn main() {
+}

@@ -41,6 +41,11 @@ module.exports = grammar({
     function_declaration: $ => seq(
       "fn",
       field("name", $.identifier),
+      "(",
+      optional(repeat(
+        field("parameter", $.identifier)
+      )),
+      ")",
       $.block,
     ),
     binary_expression: $ => choice(
