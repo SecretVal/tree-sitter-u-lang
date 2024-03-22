@@ -28,6 +28,10 @@
       {
         "type": "identifier",
         "named": true
+      },
+      {
+        "type": "type",
+        "named": true
       }
     ]
   },
@@ -55,10 +59,6 @@
     "subtypes": [
       {
         "type": "number",
-        "named": true
-      },
-      {
-        "type": "string",
         "named": true
       }
     ]
@@ -101,16 +101,6 @@
     "type": "call_expression",
     "named": true,
     "fields": {
-      "arguments": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "type",
-            "named": true
-          }
-        ]
-      },
       "function": {
         "multiple": false,
         "required": true,
@@ -121,6 +111,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -142,11 +142,19 @@
         "required": false,
         "types": [
           {
+            "type": ",",
+            "named": false
+          },
+          {
             "type": ":",
             "named": false
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type_anotation",
             "named": true
           }
         ]
@@ -156,11 +164,19 @@
         "required": false,
         "types": [
           {
+            "type": ",",
+            "named": false
+          },
+          {
             "type": ":",
             "named": false
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type_anotation",
             "named": true
           }
         ]
@@ -267,17 +283,9 @@
     }
   },
   {
-    "type": "string",
+    "type": "type_anotation",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "\"",
-    "named": false
-  },
-  {
-    "type": "'",
-    "named": false
   },
   {
     "type": "(",
@@ -289,6 +297,10 @@
   },
   {
     "type": "+",
+    "named": false
+  },
+  {
+    "type": ",",
     "named": false
   },
   {
@@ -322,6 +334,10 @@
   {
     "type": "number",
     "named": true
+  },
+  {
+    "type": "number",
+    "named": false
   },
   {
     "type": "var",

@@ -26,29 +26,19 @@ module.exports = grammar({
       $.identifier,
       $.binary_expression,
       $.call_expression,
+      $.type,
     ),
     number: $ => /\d+/,
-    string: $ => seq(
-      choice('"', "'"),
-      repeat(/.*/),
-      choice('"', "'"),
-    ),
     identifier: $ => /[a-zA-Z]+/,
     declaration: $ => choice(
       $.let_binding,
       $.function_declaration
     ),
+    type_anotation: $ => choice(
+      "number",
+    ),
     type: $ => choice(
       $.number,
-      $.string,
-    ),
-    call_expression: $ => seq(
-      field("function", $.identifier),
-      "(",
-      field("arguments", repeat(
-        $.type
-      )),
-      ")",
     ),
     function_declaration: $ => seq(
       "fn",
@@ -58,11 +48,21 @@ module.exports = grammar({
         field("parameter", seq(
           $.identifier,
           ":",
-          $.identifier
+          $.type_anotation,
+          ",",
         )),
       ))),
       ")",
       $.block,
+    ),
+    call_expression: $ => seq(
+      field("function", $.identifier),
+      "(",
+      repeat(seq(
+        $.type,
+        ","
+      )),
+      ")",
     ),
     let_binding: $ => seq(
       field("kind", choice("let", "var", "const")),
