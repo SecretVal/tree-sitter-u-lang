@@ -9,8 +9,10 @@ fn main(age: number, id: number) {}
     (function_declaration
         (identifier)
         (parameters
-          (identifier)
-          (type_anotation)
-          (identifier)
-          (type_anotation))
+            (parameter
+                (identifier)
+                (type_anotation))
+            (parameter
+                (identifier)
+                (type_anotation)))
         (block)))

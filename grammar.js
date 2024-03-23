@@ -48,11 +48,12 @@ module.exports = grammar({
       ")",
       $.block,
     ),
-    parameters: $ => commaSep1(seq(
+    parameters: $ => commaSep1($.parameter),
+    parameter: $ => seq(
       field("name", $.identifier),
       ":",
       field("type", $.type_anotation),
-    )),
+    ),
     call_expression: $ => seq(
       field("function", $.identifier),
       "(",

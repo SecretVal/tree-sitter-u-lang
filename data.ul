@@ -1,4 +1,1 @@
-fn main(a: number, b: number) {
-
-    }
-
+fn main(a: number) {}
