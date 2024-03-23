@@ -44,26 +44,24 @@ module.exports = grammar({
       "fn",
       field("name", $.identifier),
       "(",
-      field("parameters", optional(repeat(
-        field("parameter", seq(
-          $.identifier,
-          ":",
-          $.type_anotation,
-          ",",
-        )),
-      ))),
+      optional(field("parameters", $.parameters)),
       ")",
       $.block,
     ),
+    parameters: $ => commaSep1(seq(
+      field("name", $.identifier),
+      ":",
+      field("type", $.type_anotation),
+    )),
     call_expression: $ => seq(
       field("function", $.identifier),
       "(",
-      repeat(seq(
-        $.type,
-        ","
-      )),
+      field("arguments", $.arguments),
       ")",
     ),
+    arguments: $ => commaSep1(seq(
+      $.type,
+    )),
     let_binding: $ => seq(
       field("kind", choice("let", "var", "const")),
       field("name", $.identifier),
@@ -86,3 +84,30 @@ module.exports = grammar({
     )),
   }
 });
+
+
+/**
+ * Creates a rule to match one or more of the rules separated by a comma
+ *
+ * @param {RuleOrLiteral} rule
+ *
+ * @return {SeqRule}
+ *
+ */
+function commaSep1(rule) {
+  return sep1(rule, ',');
+}
+
+/**
+ * Creates a rule to match one or more occurrences of `rule` separated by `sep`
+ *
+ * @param {RuleOrLiteral} rule
+ *
+ * @param {RuleOrLiteral} separator
+ *
+ * @return {SeqRule}
+ *
+ */
+function sep1(rule, separator) {
+  return seq(rule, repeat(seq(separator, rule)));
+}

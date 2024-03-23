@@ -1,0 +1,16 @@
+===============================
+Functions
+===============================
+
+fn main(age: number, id: number) {}
+
+---
+(program
+    (function_declaration
+        (identifier)
+        (parameters
+          (identifier)
+          (type_anotation)
+          (identifier)
+          (type_anotation))
+        (block)))
