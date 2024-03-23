@@ -15,9 +15,9 @@
         system,
         ...
       }: let
-        inherit (pkgs) dockerTools buildNpmPackage;
-        inherit (dockerTools) buildImage;
-        name = "tree-sitter-u-lang";
+        inherit (pkgs) tree-sitter;
+        inherit (tree-sitter) buildGrammar;
+        name = "u-lang";
         version = "0.1.0";
       in {
         devShells = {
@@ -28,23 +28,10 @@
         };
 
         packages = {
-          default = buildNpmPackage {
+          default = buildGrammar {
+            language = name;
             inherit version;
-            pname = name;
             src = ./.;
-            npmDepsHash = "sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=";
-            dontNpmBuild = true;
-          };
-
-          docker = buildImage {
-            inherit name;
-            tag = version;
-            config = {
-              Cmd = ["${self'.packages.default}/bin/${name}"];
-              Env = [
-                "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-              ];
-            };
           };
         };
       };
